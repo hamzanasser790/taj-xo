@@ -1,0 +1,6 @@
+*.sql
+.gradle/
+build/
+app/build/
+*.keystore
+*.jks

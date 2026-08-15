@@ -1,0 +1,6 @@
+{
+  "name": "XO MAX",
+  "description": "منصة التحديات والبطولات الاحترافية لـ XO MAX مع جوائز مالية ومنافسة قوية بين اللاعبين.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
