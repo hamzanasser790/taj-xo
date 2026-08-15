@@ -20,15 +20,11 @@ jobs:
         distribution: 'temurin'
         cache: gradle
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew || true
-
     - name: Build Release Bundle (AAB)
-      run: ./gradlew bundleRelease -Pandroid.overrideVersionCheck=true --no-daemon
+      run: gradle bundleRelease -Pandroid.overrideVersionCheck=true --no-daemon
 
     - name: Upload AAB Package
       uses: actions/upload-artifact@v4
       with:
         name: app-release-aab
         path: app/build/outputs/bundle/release/*.aab
-
