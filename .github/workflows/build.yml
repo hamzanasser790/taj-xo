@@ -21,11 +21,11 @@ jobs:
 
     - name: Setup Gradle Wrapper
       run: |
-        gradle wrapper --gradle-version 8.2
+        gradle wrapper --gradle-version 8.0
         chmod +x gradlew
 
     - name: Build Release Bundle (AAB)
-      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache
+      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache -Dorg.gradle.jvmargs="-Dnet.bytebuddy.experimental=true"
 
     - name: Upload AAB Package
       uses: actions/upload-artifact@v4
