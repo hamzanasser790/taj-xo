@@ -24,12 +24,12 @@ jobs:
         gradle wrapper --gradle-version 9.3.1
         chmod +x gradlew
 
-    - name: Generate Dummy Keystore
+    - name: Generate Keystore
       run: |
-        keytool -genkey -v -keystore my-upload-key.jks -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=Android, OU=Dev, O=App, L=City, S=State, C=US"
+        keytool -genkey -v -keystore app/my-upload-key.jks -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=Android, OU=Dev, O=App, L=City, S=State, C=US"
 
     - name: Build Release Bundle (AAB)
-      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache
+      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache -Pandroid.injected.signing.store.file=app/my-upload-key.jks -Pandroid.injected.signing.store.password=password -Pandroid.injected.signing.key.alias=my-key-alias -Pandroid.injected.signing.key.pass=password
 
     - name: Upload AAB Package
       uses: actions/upload-artifact@v4
