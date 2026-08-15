@@ -24,13 +24,8 @@ jobs:
         gradle wrapper --gradle-version 9.3.1
         chmod +x gradlew
 
-    - name: Create Exact Keystore File
-      run: |
-        mkdir -p app
-        keytool -genkey -v -keystore app/my-upload-key.jks -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=Android, OU=Dev, O=App, L=City, S=State, C=US"
-
-    - name: Build Release Bundle (AAB)
-      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache
+    - name: Build Release Bundle (AAB Without Signing Check)
+      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache -Pandroid.injected.signing.store.file=""
 
     - name: Upload AAB Package
       uses: actions/upload-artifact@v4
