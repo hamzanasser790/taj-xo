@@ -24,6 +24,10 @@ jobs:
         gradle wrapper --gradle-version 9.3.1
         chmod +x gradlew
 
+    - name: Generate Dummy Keystore
+      run: |
+        keytool -genkey -v -keystore my-upload-key.jks -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000 -storepass password -keypass password -dname "CN=Android, OU=Dev, O=App, L=City, S=State, C=US"
+
     - name: Build Release Bundle (AAB)
       run: ./gradlew bundleRelease --no-daemon --no-configuration-cache
 
