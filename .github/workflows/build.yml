@@ -24,8 +24,12 @@ jobs:
         gradle wrapper --gradle-version 9.3.1
         chmod +x gradlew
 
-    - name: Build Release Bundle (AAB Without Signing Check)
-      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache -Pandroid.injected.signing.store.file=""
+    - name: Generate Debug Keystore
+      run: |
+        keytool -genkey -v -keystore debug.keystore -alias androiddebugkey -keyalg RSA -keysize 2048 -validity 10000 -storepass android -keypass android -dname "CN=Android Debug, O=Android, C=US"
+
+    - name: Build Release Bundle (AAB)
+      run: ./gradlew bundleRelease --no-daemon --no-configuration-cache
 
     - name: Upload AAB Package
       uses: actions/upload-artifact@v4
