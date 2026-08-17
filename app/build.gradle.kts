@@ -21,11 +21,14 @@ android {
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    // روابط وقواعد بيانات السيرفر لضمان الاتصال الفوري
+    buildConfigField("String", "SUPABASE_URL", "\"https://uioqbwfjvoarqvrhxemb.supabase.co/rest/v1/\"")
+    buildConfigField("String", "SUPABASE_KEY", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVpb3Fid2Zqdm9hcnF2cmh4ZW1iIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIwODA5MjIsImV4cCI6MjA5NzY1NjkyMn0.-BgSrUC48x2c5Rb_vDU5AWx9wGZs9XfQP7i6X3na-UE\"")
   }
 
   signingConfigs {
     create("release") {
-      // استخدام مسار موحد لضمان العثور على الملف
       storeFile = file("${rootDir}/debug.keystore")
       storePassword = "android"
       keyAlias = "androiddebugkey"
